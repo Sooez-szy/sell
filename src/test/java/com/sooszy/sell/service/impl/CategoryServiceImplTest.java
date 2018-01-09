@@ -9,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -35,9 +34,16 @@ public class CategoryServiceImplTest {
 
     @Test
     public void findByCategoryTypeIn() {
+        List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(Arrays.asList(1,10));
+        log.info(productCategoryList.toString());
+        Assert.assertNotEquals(0,productCategoryList.size());
     }
 
     @Test
     public void save() {
+        ProductCategory productCategory = new ProductCategory("男生专享",11);
+        ProductCategory result = categoryService.save(productCategory);
+        log.info(result.toString());
+        Assert.assertNotNull(result);
     }
 }
